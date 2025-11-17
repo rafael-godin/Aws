@@ -1,0 +1,46 @@
+# IAM policy for S3 Batch Operations role
+# Copy objects: PutObject
+# Reference: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-iam-role-policies.html#batch-ops-iam-role-policies-perm
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:GetObjectVersion"
+            ],
+            "Resource": [
+                "arn:aws:s3:::your-source-bucket/*",
+                "arn:aws:s3:::your-manifest-bucket/path/to/manifest.csv"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:PutObjectAcl",
+                "s3:PutObjectTagging"
+            ],
+            "Resource": "arn:aws:s3:::your-destination-bucket/*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject"
+            ],
+            "Resource": "arn:aws:s3:::your-completion-report-bucket/path/to/completion-report/*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "s3:CreateJob",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "s3:GetJobTagging",
+            "Resource": "arn:aws:s3express:*:*:job/*"
+        }
+    ]
+}
