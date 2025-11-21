@@ -1,0 +1,15 @@
+# Trust policy to allow the S3 Batch Operations 
+# service principal to assume the IAM role.
+# Reference: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-iam-role-policies.html
+{
+   "Version":"2012-10-17",		 	 	 
+   "Statement":[
+      {
+         "Effect":"Allow",
+         "Principal":{
+            "Service":"batchoperations.s3.amazonaws.com"
+         },
+         "Action":"sts:AssumeRole"
+      }
+   ]
+}
